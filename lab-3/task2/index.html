@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab 3 – To‑Do List</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__inner">
+        <h1 class="header__title">To‑Do List</h1>
+        <p class="header__subtitle">
+          Simple single‑page app with vanilla JavaScript.
+        </p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="todo">
+        <header class="todo__header">
+          <h2 class="todo__title">My Tasks</h2>
+        </header>
+
+        <form class="todo__form" id="todo-form" autocomplete="off">
+          <label class="todo__label" for="todo-input">
+            New task
+          </label>
+          <div class="todo__input-row">
+            <input
+              id="todo-input"
+              name="todo"
+              class="todo__input"
+              type="text"
+              placeholder="e.g. Finish JavaScript lab"
+              required
+            />
+            <button class="todo__button" type="submit">
+              Add
+            </button>
+          </div>
+        </form>
+
+        <section class="todo__list-section" aria-live="polite">
+          <h3 class="todo__list-title">Tasks</h3>
+          <ul class="todo__list" id="todo-list">
+          </ul>
+          <p class="todo__empty" id="todo-empty">No tasks yet. Add one above.</p>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__text">
+        Lab 3 &middot; HTML &middot; CSS &middot; JavaScript
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
+

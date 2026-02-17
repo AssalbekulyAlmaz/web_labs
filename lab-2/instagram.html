@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fafafa;
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            max-width: 1100px;
+            width: 100%;
+            gap: 80px;
+        }
+
+        .left-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        .instagram-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .instagram-logo svg {
+            width: 36px;
+            height: 36px;
+            fill: white;
+        }
+
+        .hero-text {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 450px;
+        }
+
+        .hero-text h1 {
+            font-size: 34px;
+            line-height: 1.4;
+            color: #262626;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .hero-text .highlight {
+            color: #e1306c;
+            font-weight: 700;
+        }
+
+        .images-showcase {
+            position: relative;
+            width: 380px;
+            height: 320px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .phone-mockup {
+            position: absolute;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .phone-mockup:nth-child(1) {
+            width: 180px;
+            height: 240px;
+            left: 0;
+            top: 20px;
+            z-index: 3;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .phone-mockup:nth-child(2) {
+            width: 220px;
+            height: 280px;
+            left: 80px;
+            top: 0;
+            z-index: 2;
+            animation: float 4s ease-in-out infinite 0.5s;
+        }
+
+        .phone-mockup:nth-child(3) {
+            width: 190px;
+            height: 250px;
+            left: 170px;
+            top: 30px;
+            z-index: 1;
+            animation: float 4s ease-in-out infinite 1s;
+        }
+
+        .phone-mockup img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reaction-icon {
+            position: absolute;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .heart-icon {
+            bottom: 30px;
+            left: -10px;
+            font-size: 48px;
+            z-index: 4;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        .checkmark-icon {
+            top: 50px;
+            right: -15px;
+            width: 50px;
+            height: 50px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            z-index: 4;
+        }
+
+        .right-section {
+            flex: 0 0 400px;
+            animation: fadeInRight 0.8s ease-out;
+        }
+
+        .login-box {
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 12px;
+            padding: 50px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .login-header h2 {
+            text-align: center;
+            font-size: 18px;
+            color: #262626;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: #8e8e8e;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fafafa;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #a8a8a8;
+            background: white;
+        }
+
+        .form-group input::placeholder {
+            color: #8e8e8e;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .forgot-password a {
+            color: #00376b;
+            font-size: 13px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            color: #8e8e8e;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #dbdbdb;
+        }
+
+        .divider::before {
+            margin-right: 20px;
+        }
+
+        .divider::after {
+            margin-left: 20px;
+        }
+
+        .facebook-login {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            color: #385185;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .facebook-login:hover {
+            background: #fafafa;
+        }
+
+        .facebook-icon {
+            font-size: 18px;
+        }
+
+        .create-account {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 1px solid #0095f6;
+            border-radius: 8px;
+            color: #0095f6;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .create-account:hover {
+            background: #f0f8ff;
+        }
+
+        .meta-logo {
+            text-align: center;
+            margin-top: 25px;
+            color: #8e8e8e;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #8e8e8e;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-copyright {
+            color: #8e8e8e;
+            font-size: 12px;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .left-section {
+                display: none;
+            }
+
+            .right-section {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 40px 24px;
+            }
+
+            .right-section {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="instagram-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+            </div>
+            
+            <div class="hero-text">
+                <h1>Посмотрите, какими моментами из жизни поделились ваши <span class="highlight">близкие друзья</span>.</h1>
+            </div>
+
+            <div class="images-showcase">
+                <div class="phone-mockup">
+                    <img src="almaz_photo.jpg" alt="Instagram Post">
+                </div>
+                <div class="phone-mockup">
+                    <img src="almaz_photo.jpg" alt="Instagram Post">
+                </div>
+                <div class="phone-mockup">
+                    <img src="almaz_photo.jpg" alt="Instagram Post">
+                </div>
+                <div class="reaction-icon heart-icon">❤️</div>
+                <div class="reaction-icon checkmark-icon">✓</div>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="login-box">
+                <div class="login-header">
+                    <h2>Войти в Instagram</h2>
+                </div>
+
+                <form>
+                    <div class="form-group">
+                        <input type="text" placeholder="Имя пользователя, номер мобильного телефона или эл. адрес..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" placeholder="" required>
+                    </div>
+
+                    <button type="submit" class="login-button">Войти</button>
+
+                    <div class="forgot-password">
+                        <a href="#">Забыли пароль?</a>
+                    </div>
+                </form>
+
+                <div class="divider">ИЛИ</div>
+
+                <button class="facebook-login">
+                    <span class="facebook-icon">f</span>
+                    Войти через Facebook
+                </button>
+
+                <button class="create-account">Создать новый аккаунт</button>
+
+                <div class="meta-logo">
+                    <span>from</span> <strong>Meta</strong>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-links">
+                    <a href="#">Meta</a>
+                    <a href="#">Информация</a>
+                    <a href="#">Блог</a>
+                    <a href="#">Вакансии</a>
+                    <a href="#">Помощь</a>
+                    <a href="#">API</a>
+                    <a href="#">Конфиденциальность</a>
+                    <a href="#">Условия</a>
+                    <a href="#">Места</a>
+                    <a href="#">Instagram Lite</a>
+                    <a href="#">Threads</a>
+                    <a href="#">Загрузка контактов и лица, не являющиеся пользователями</a>
+                    <a href="#">Meta Verified</a>
+                </div>
+                <div class="footer-copyright">
+                    Русский ▼ &nbsp;&nbsp; © 2026 Instagram from Meta
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

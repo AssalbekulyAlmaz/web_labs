@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0d1117;
+            --color-bg-secondary: #161b22;
+            --color-bg-tertiary: #21262d;
+            --color-border: #30363d;
+            --color-text-primary: #e6edf3;
+            --color-text-secondary: #7d8590;
+            --color-text-muted: #6e7681;
+            --color-accent-primary: #2f81f7;
+            --color-accent-emphasis: #1f6feb;
+            --color-success: #238636;
+            --color-badge-blue: #0969da;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
+            --spacing-3xl: 64px;
+            --border-radius-sm: 6px;
+            --border-radius-md: 12px;
+            --font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-bg);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: var(--spacing-3xl) 0 var(--spacing-2xl);
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero__title {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-lg);
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #a8b5c8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero__description {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            max-width: 720px;
+            margin: 0 auto var(--spacing-xl);
+            line-height: 1.7;
+        }
+
+        .hero__cta {
+            display: inline-block;
+            background-color: var(--color-success);
+            color: white;
+            padding: 14px 32px;
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 20px rgba(35, 134, 54, 0.3);
+        }
+
+        .hero__cta:hover {
+            background-color: #2ea043;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 24px rgba(35, 134, 54, 0.4);
+        }
+
+        /* Pricing Tiers Section */
+        .pricing-tiers {
+            padding: var(--spacing-2xl) 0;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .pricing-card {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-xl);
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--color-accent-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(47, 129, 247, 0.15);
+        }
+
+        .pricing-card--recommended {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            border-color: var(--color-accent-emphasis);
+            transform: scale(1.02);
+        }
+
+        .pricing-card--recommended:hover {
+            transform: scale(1.02) translateY(-4px);
+        }
+
+        .pricing-card__badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--color-badge-blue);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-card__header {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .pricing-card__name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .pricing-card__subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .pricing-card--recommended .pricing-card__subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .pricing-card__price {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .pricing-card__amount {
+            display: flex;
+            align-items: baseline;
+            gap: var(--spacing-xs);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .pricing-card__currency {
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .pricing-card__number {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .pricing-card__unit {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+        }
+
+        .pricing-card--recommended .pricing-card__unit {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .pricing-card__period {
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+
+        .pricing-card--recommended .pricing-card__period {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .pricing-card__cta {
+            width: 100%;
+            padding: 12px 24px;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: var(--spacing-lg);
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .pricing-card__cta--primary {
+            background-color: var(--color-bg-tertiary);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        .pricing-card__cta--primary:hover {
+            background-color: #30363d;
+            border-color: #8b949e;
+        }
+
+        .pricing-card__cta--secondary {
+            background-color: white;
+            color: var(--color-bg);
+        }
+
+        .pricing-card__cta--secondary:hover {
+            background-color: #f6f8fa;
+        }
+
+        .pricing-card__cta--tertiary {
+            background-color: transparent;
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        .pricing-card__cta--tertiary:hover {
+            background-color: var(--color-bg-tertiary);
+        }
+
+        .pricing-card__features {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .pricing-card__feature {
+            padding: var(--spacing-sm) 0;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+        }
+
+        .pricing-card--recommended .pricing-card__feature {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .pricing-card__feature::before {
+            content: "✓";
+            color: var(--color-success);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .pricing-card--recommended .pricing-card__feature::before {
+            color: #7ee787;
+        }
+
+        /* Add-ons Section */
+        .addons {
+            padding: var(--spacing-3xl) 0;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .addons__header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .addons__title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .addons__subtitle {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+        }
+
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .addon-card {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            transition: all 0.3s ease;
+        }
+
+        .addon-card:hover {
+            border-color: var(--color-accent-primary);
+            box-shadow: 0 4px 20px rgba(47, 129, 247, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .addon-card__icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-accent-primary) 0%, #0969da 100%);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+            font-size: 20px;
+        }
+
+        .addon-card__name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .addon-card__description {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        .addon-card__price {
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+
+        .addon-card__price strong {
+            color: var(--color-text-primary);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+            }
+
+            .pricing-card--recommended {
+                transform: scale(1);
+            }
+
+            .pricing-card--recommended:hover {
+                transform: translateY(-4px);
+            }
+
+            .addons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero__title {
+                font-size: 36px;
+            }
+
+            .hero__description {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+
+            .hero {
+                padding: var(--spacing-2xl) 0;
+            }
+
+            .hero__title {
+                font-size: 28px;
+            }
+
+            .addons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card__amount {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero__title">Try the Copilot-powered platform</h1>
+                <p class="hero__description">
+                    We get it. Pricing is a lot you can do with GitHub. That's why we've packed all of it into a single, low-price that includes GitHub Enterprise, 
+                    Copilot, and Advanced Security—all in one.
+                </p>
+                <a href="#" class="hero__cta">Start free for 30 days</a>
+            </div>
+        </section>
+
+        <!-- Pricing Tiers -->
+        <section class="pricing-tiers">
+            <div class="container">
+                <div class="pricing-grid">
+                    <!-- Free Tier -->
+                    <article class="pricing-card">
+                        <div class="pricing-card__header">
+                            <h2 class="pricing-card__name">Free</h2>
+                            <p class="pricing-card__subtitle">The basics for individuals and organizations</p>
+                        </div>
+                        
+                        <div class="pricing-card__price">
+                            <div class="pricing-card__amount">
+                                <span class="pricing-card__currency">$</span>
+                                <span class="pricing-card__number">0</span>
+                                <span class="pricing-card__unit">USD</span>
+                            </div>
+                            <p class="pricing-card__period">per user/month</p>
+                        </div>
+
+                        <a href="#" class="pricing-card__cta pricing-card__cta--primary">Join for free</a>
+
+                        <ul class="pricing-card__features">
+                            <li class="pricing-card__feature">Unlimited public/private repositories</li>
+                            <li class="pricing-card__feature">Repository level security and version updates</li>
+                            <li class="pricing-card__feature">2,000 CI/CD minutes/month</li>
+                            <li class="pricing-card__feature">500 MB of package storage</li>
+                            <li class="pricing-card__feature">New issues & Projects</li>
+                            <li class="pricing-card__feature">Community support</li>
+                        </ul>
+                    </article>
+
+                    <!-- Team Tier -->
+                    <article class="pricing-card">
+                        <div class="pricing-card__header">
+                            <h2 class="pricing-card__name">Team</h2>
+                            <p class="pricing-card__subtitle">Advanced collaboration for individuals and organizations</p>
+                        </div>
+                        
+                        <div class="pricing-card__price">
+                            <div class="pricing-card__amount">
+                                <span class="pricing-card__currency">$</span>
+                                <span class="pricing-card__number">4</span>
+                                <span class="pricing-card__unit">USD</span>
+                            </div>
+                            <p class="pricing-card__period">per user/month</p>
+                        </div>
+
+                        <a href="#" class="pricing-card__cta pricing-card__cta--primary">Continue with Team</a>
+
+                        <ul class="pricing-card__features">
+                            <li class="pricing-card__feature">Everything included in Free, plus...</li>
+                            <li class="pricing-card__feature">Access to GitHub Codespaces</li>
+                            <li class="pricing-card__feature">Protected branches</li>
+                            <li class="pricing-card__feature">Multiple reviewers in pull requests</li>
+                            <li class="pricing-card__feature">Draft pull requests</li>
+                            <li class="pricing-card__feature">Code owners</li>
+                            <li class="pricing-card__feature">Pages and Wikis</li>
+                            <li class="pricing-card__feature">Environment deployment branches and secrets</li>
+                            <li class="pricing-card__feature">3,000 CI/CD minutes/month</li>
+                            <li class="pricing-card__feature">2 GB of package storage</li>
+                            <li class="pricing-card__feature">Web-based support</li>
+                        </ul>
+                    </article>
+
+                    <!-- Enterprise Tier -->
+                    <article class="pricing-card pricing-card--recommended">
+                        <span class="pricing-card__badge">Recommended</span>
+                        
+                        <div class="pricing-card__header">
+                            <h2 class="pricing-card__name">Enterprise</h2>
+                            <p class="pricing-card__subtitle">Security, compliance, and flexible deployment</p>
+                        </div>
+                        
+                        <div class="pricing-card__price">
+                            <div class="pricing-card__amount">
+                                <span class="pricing-card__currency">$</span>
+                                <span class="pricing-card__number">21</span>
+                                <span class="pricing-card__unit">USD</span>
+                            </div>
+                            <p class="pricing-card__period">per user/month</p>
+                        </div>
+
+                        <div style="display: flex; gap: 8px; margin-bottom: 24px;">
+                            <a href="#" class="pricing-card__cta pricing-card__cta--secondary" style="margin-bottom: 0;">Start a free trial</a>
+                            <a href="#" class="pricing-card__cta pricing-card__cta--tertiary" style="margin-bottom: 0;">Contact Sales</a>
+                        </div>
+
+                        <ul class="pricing-card__features">
+                            <li class="pricing-card__feature">Everything included in Team, plus...</li>
+                            <li class="pricing-card__feature">SAML single sign-on</li>
+                            <li class="pricing-card__feature">Enterprise Managed Users</li>
+                            <li class="pricing-card__feature">User provisioning with SCIM</li>
+                            <li class="pricing-card__feature">Ability to provision multiple organizations</li>
+                            <li class="pricing-card__feature">Environment protection rules</li>
+                            <li class="pricing-card__feature">Repository rules</li>
+                            <li class="pricing-card__feature">Audit Log API</li>
+                            <li class="pricing-card__feature">SAML/OIDC SSO, User provisioning</li>
+                            <li class="pricing-card__feature">Push/Pull (Direct Connect to Servers) MPLS</li>
+                            <li class="pricing-card__feature">Advanced auditing</li>
+                            <li class="pricing-card__feature">GitHub Connect</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Add-ons Section -->
+        <section class="addons">
+            <div class="container">
+                <header class="addons__header">
+                    <h2 class="addons__title">Additional add-ons</h2>
+                    <p class="addons__subtitle">Enhance your GitHub experience with powerful integrations and tools</p>
+                </header>
+
+                <div class="addons-grid">
+                    <article class="addon-card">
+                        <div class="addon-card__icon" aria-hidden="true">🤖</div>
+                        <h3 class="addon-card__name">GitHub Copilot</h3>
+                        <p class="addon-card__description">AI-powered code completion and suggestions to help you write code faster and with fewer errors.</p>
+                        <p class="addon-card__price"><strong>$10</strong> per user/month</p>
+                    </article>
+
+                    <article class="addon-card">
+                        <div class="addon-card__icon" aria-hidden="true">🔒</div>
+                        <h3 class="addon-card__name">Advanced Security</h3>
+                        <p class="addon-card__description">Code scanning, secret scanning, and dependency review to keep your code secure and compliant.</p>
+                        <p class="addon-card__price"><strong>$49</strong> per active committer/month</p>
+                    </article>
+
+                    <article class="addon-card">
+                        <div class="addon-card__icon" aria-hidden="true">💾</div>
+                        <h3 class="addon-card__name">Additional Storage</h3>
+                        <p class="addon-card__description">Expand your package and artifact storage beyond the included allocation for your plan.</p>
+                        <p class="addon-card__price"><strong>$0.25</strong> per GB/month</p>
+                    </article>
+
+                    <article class="addon-card">
+                        <div class="addon-card__icon" aria-hidden="true">⚡</div>
+                        <h3 class="addon-card__name">CI/CD Minutes</h3>
+                        <p class="addon-card__description">Additional Actions minutes for running automated workflows and continuous integration pipelines.</p>
+                        <p class="addon-card__price"><strong>$0.008</strong> per minute</p>
+                    </article>
+
+                    <article class="addon-card">
+                        <div class="addon-card__icon" aria-hidden="true">☁️</div>
+                        <h3 class="addon-card__name">Codespaces Compute</h3>
+                        <p class="addon-card__description">Cloud-powered development environments accessible from anywhere with your browser or VS Code.</p>
+                        <p class="addon-card__price"><strong>$0.18</strong> per hour</p>
+                    </article>
+
+                    <article class="addon-card">
+                        <div class="addon-card__icon" aria-hidden="true">🛡️</div>
+                        <h3 class="addon-card__name">Premium Support</h3>
+                        <p class="addon-card__description">Priority response times, dedicated support engineer, and expert guidance for your team.</p>
+                        <p class="addon-card__price"><strong>Custom</strong> pricing</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
