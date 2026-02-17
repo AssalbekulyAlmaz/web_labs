@@ -1,0 +1,244 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  background: linear-gradient(135deg, #1d2671, #c33764);
+  color: #111827;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 1.5rem 1rem 1rem;
+  color: #f9fafb;
+}
+
+.header__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.header__title {
+  margin: 0;
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.header__subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.todo {
+  background-color: #f9fafb;
+  border-radius: 0.75rem;
+  box-shadow:
+    0 10px 15px -3px rgba(15, 23, 42, 0.2),
+    0 4px 6px -2px rgba(15, 23, 42, 0.15);
+  max-width: 720px;
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.todo__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.todo__title {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.todo__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.todo__label {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.todo__input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.todo__input {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.todo__input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+.todo__button {
+  padding: 0 1.25rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #2563eb;
+  color: #f9fafb;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, transform 0.05s ease,
+    box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.todo__button:hover {
+  background-color: #1d4ed8;
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+}
+
+.todo__button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.todo__list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.todo__list-title {
+  margin: 0;
+  font-size: 1rem;
+  color: #374151;
+}
+
+.todo__empty {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.todo__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.todo-item__main {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-item__checkbox {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.todo-item__text {
+  font-size: 0.95rem;
+  color: #111827;
+  word-break: break-word;
+}
+
+.todo-item--completed .todo-item__text {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.todo-item__delete-button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.75rem;
+  background-color: #f97373;
+  color: #f9fafb;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.05s ease;
+  flex-shrink: 0;
+}
+
+.todo-item__delete-button:hover {
+  background-color: #ef4444;
+}
+
+.todo-item__delete-button:active {
+  transform: translateY(1px);
+}
+
+.footer {
+  padding: 0.75rem 1rem 1.25rem;
+  text-align: center;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.footer__text {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .todo {
+    padding: 1.25rem;
+  }
+
+  .todo__input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .todo__button {
+    width: 100%;
+  }
+}
+
