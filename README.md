@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Lab 4 - Angular
 ================
 
@@ -27,3 +28,6 @@ Task 2 (online-store) – how to run
 
 Make sure you have Node.js, npm, and the Angular CLI installed globally before running these commands.
 
+=======
+# web_labs
+>>>>>>> 63b0506348cf5f53f3d12c9baae2f8d6e49d78b0
