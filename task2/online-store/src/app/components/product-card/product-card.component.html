@@ -1,0 +1,100 @@
+<article class="card">
+  <div class="card__image-wrapper">
+    <img
+      class="card__image"
+      [src]="selectedImage"
+      [alt]="product.name"
+      loading="lazy"
+    />
+    <button
+      class="card__nav card__nav--prev"
+      type="button"
+      (click)="prevImage()"
+      aria-label="Previous image"
+    >
+      ‹
+    </button>
+    <button
+      class="card__nav card__nav--next"
+      type="button"
+      aria-label="Next image"
+      (click)="nextImage()"
+    >
+      ›
+    </button>
+    <div class="card__rating">
+      <span class="card__stars">
+        <ng-container *ngFor="let star of [1,2,3,4,5]">
+          <span
+            class="star"
+            [class.star--filled]="product.rating >= star - 0.25"
+          >
+            ★
+          </span>
+        </ng-container>
+      </span>
+      <span class="card__rating-value">{{ product.rating | number : '1.1-1' }}</span>
+    </div>
+  </div>
+
+  <div class="card__body">
+    <h2 class="card__title">
+      <a [href]="product.link" target="_blank" rel="noopener noreferrer">
+        {{ product.name }}
+      </a>
+    </h2>
+
+    <p class="card__description">
+      {{ product.description }}
+    </p>
+
+    <div class="card__meta">
+      <div class="card__price">
+        {{ product.price | number : '1.0-0' }} ₸
+      </div>
+    </div>
+
+    <div class="card__gallery" *ngIf="product.images?.length > 1">
+      <button
+        type="button"
+        class="card__thumb"
+        *ngFor="let img of product.images; let i = index"
+        [class.card__thumb--active]="i === selectedImageIndex"
+        (click)="selectImage(i)"
+      >
+        <img [src]="img" [alt]="product.name + ' thumbnail ' + (i + 1)" />
+      </button>
+    </div>
+
+    <div class="card__actions">
+      <a
+        class="btn btn--primary"
+        [href]="product.link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open on Kaspi
+      </a>
+
+      <div class="card__share-group">
+        <a
+          class="btn btn--ghost"
+          [href]="whatsAppShareUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Share WhatsApp
+        </a>
+        <a
+          class="btn btn--ghost"
+          [href]="telegramShareUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Share Telegram
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
+
