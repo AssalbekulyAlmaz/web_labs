@@ -1,0 +1,25 @@
+<section class="products">
+  <header class="products__header">
+    <div>
+      <h2 class="products__title">Products</h2>
+      <p class="products__subtitle">
+        Категориядағы тауарлар тізімі. Ұнаған өнімдерді лайктап, қажет
+        болмаса өшіре аласыз.
+      </p>
+    </div>
+  </header>
+
+  @if (visibleProducts.length) {
+    <div class="products__grid">
+      @for (product of visibleProducts; track product.id) {
+        <app-product-item
+          [product]="product"
+          (delete)="handleDelete($event)"
+        ></app-product-item>
+      }
+    </div>
+  } @else {
+    <p class="products__empty">Бұл категорияда өнімдер жоқ.</p>
+  }
+</section>
+

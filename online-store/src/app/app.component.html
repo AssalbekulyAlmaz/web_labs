@@ -1,0 +1,83 @@
+<header class="app-header">
+  <div class="app-header__top">
+    <div class="app-header__inner">
+      <div class="app-header__brand">
+        <span class="app-header__logo-circle">K</span>
+        <span class="app-header__brand-text">Kaspi.kz</span>
+      </div>
+      <nav class="app-header__top-nav">
+        <a href="#">Клиентам</a>
+        <a href="#">Бизнесу</a>
+        <a href="#">Kaspi Гид</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="app-header__bottom">
+    <div class="app-header__inner app-header__bottom-inner">
+      <div class="app-header__tabs">
+        <button class="app-header__tab app-header__tab--active" type="button">
+          Магазин
+        </button>
+        <button class="app-header__tab" type="button">
+          Платежи
+        </button>
+        <button class="app-header__tab" type="button">
+          Переводы
+        </button>
+      </div>
+
+      <div class="app-header__search">
+        <input
+          type="text"
+          class="app-header__search-input"
+          placeholder="Поиск товара"
+        />
+      </div>
+
+      <div class="app-header__city">
+        <span class="app-header__city-label">Мой город:</span>
+        <button type="button" class="app-header__city-button">
+          Алматы
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="app-main app-layout">
+  <aside class="app-sidebar">
+    <h2 class="app-sidebar__title">Все категории</h2>
+    <div class="app-sidebar__list">
+      @for (category of categories; track category.id) {
+        <button
+          type="button"
+          class="app-sidebar__item"
+          [class.app-sidebar__item--active]="category.id === selectedCategoryId"
+          (click)="selectCategory(category.id)"
+        >
+          {{ category.name }}
+        </button>
+      }
+    </div>
+  </aside>
+
+  <section class="app-content">
+    @if (!selectedCategoryId) {
+      <section class="app-welcome">
+        <h1 class="app-welcome__title">Добро пожаловать в магазин</h1>
+        <p class="app-welcome__text">
+          Выберите категорию слева, чтобы увидеть товары. Нажимайте лайк, делитесь
+          ссылкой и удаляйте товары из списка по необходимости.
+        </p>
+      </section>
+    } @else {
+      <app-product-list [products]="selectedProducts"></app-product-list>
+    }
+  </section>
+</main>
+
+<footer class="app-footer">
+  <p>Online Store · Angular Lab 5</p>
+</footer>
+
