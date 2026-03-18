@@ -43,6 +43,7 @@ export class AlbumDetail implements OnInit {
 
   saveAlbum(): void {
     if (!this.album) return;
+    if (!this.editTitle || this.editTitle.trim() === '') return; 
     this.saving = true;
     const updated: Album = { ...this.album, title: this.editTitle };
     this.albumService.updateAlbum(updated).subscribe({

@@ -1,20 +1,64 @@
 <header class="app-header">
-  <div class="app-header__inner">
-    <div class="app-header__brand">
-      <span class="app-header__logo">🛍️</span>
-      <span class="app-header__title">{{ title }}</span>
+  <div class="app-header__top">
+    <div class="app-header__inner">
+      <div class="app-header__brand">
+        <span class="app-header__logo">Kaspi.kz</span>
+      </div>
+
+      <nav class="app-header__links">
+        <a href="#">Клиентам</a>
+        <a href="#">Бизнесу</a>
+        <a href="#">Kaspi Гид</a>
+      </nav>
     </div>
-    <nav class="app-header__nav">
-      <a routerLink="/products" routerLinkActive="active">Products</a>
-    </nav>
+  </div>
+
+  <div class="app-header__bottom">
+    <div class="app-header__inner app-header__bottom-inner">
+      <nav class="app-header__tabs">
+        <button class="app-header__tab app-header__tab--active" type="button">
+          Магазин
+        </button>
+        <button class="app-header__tab" type="button">Платежи</button>
+        <button class="app-header__tab" type="button">Переводы</button>
+      </nav>
+
+      <div class="app-header__search">
+        <input
+          type="text"
+          placeholder="Поиск товара"
+          class="app-header__search-input"
+        />
+      </div>
+
+      <div class="app-header__city">Мой город: Алматы</div>
+    </div>
   </div>
 </header>
 
-<main class="app-main">
-  <router-outlet></router-outlet>
+<main class="app-main app-layout">
+  <aside class="app-sidebar">
+    <h2 class="app-sidebar__title">Categories</h2>
+    <div class="app-sidebar__list">
+      @for (category of categories; track category.id) {
+        <button
+          type="button"
+          class="app-sidebar__item"
+          [class.app-sidebar__item--active]="category.id === selectedCategoryId"
+          (click)="selectCategory(category.id)"
+        >
+          {{ category.name }}
+        </button>
+      }
+    </div>
+  </aside>
+
+  <section class="app-content">
+    <app-product-list [products]="selectedProducts"></app-product-list>
+  </section>
 </main>
 
 <footer class="app-footer">
-  <p>Online Store · Angular Lab 4</p>
+  <p>Online Store · Angular Lab 5</p>
 </footer>
 

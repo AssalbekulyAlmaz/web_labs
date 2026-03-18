@@ -1,14 +1,37 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductService } from './services/product.service';
+import { Category } from './models/category.model';
+import { Product } from './models/product.model';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink],
+  imports: [CommonModule, ProductListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'Online Store';
+
+  categories: Category[] = [];
+  selectedCategoryId: number | null = null;
+  selectedProducts: Product[] = [];
+
+  constructor(private readonly productService: ProductService) {
+    this.categories = this.productService.getCategories();
+
+    // Select the first category by default (e.g. Smartphones)
+    if (this.categories.length) {
+      this.selectCategory(this.categories[0].id);
+    }
+  }
+
+  selectCategory(categoryId: number): void {
+    this.selectedCategoryId = categoryId;
+    this.selectedProducts =
+      this.productService.getProductsByCategory(categoryId);
+  }
 }
 

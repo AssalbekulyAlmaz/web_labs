@@ -27,7 +27,11 @@
       <label class="field-label">Album Title</label>
       <input type="text" class="title-input" [(ngModel)]="editTitle" />
       <div class="edit-actions">
-        <button class="btn-save" (click)="saveAlbum()" [disabled]="saving">
+        <button
+          class="btn-save"
+          (click)="saveAlbum()"
+          [disabled]="saving || !editTitle || editTitle.trim() === ''"
+        >
           {{ saving ? 'Saving...' : '💾 Save Title' }}
         </button>
         <span class="success-msg" *ngIf="saveSuccess">✅ Saved!</span>

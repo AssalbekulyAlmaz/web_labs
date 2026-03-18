@@ -1,23 +1,25 @@
 <section class="products">
   <header class="products__header">
     <div>
-      <h1 class="products__title">Kaspi Online Store (Demo)</h1>
+      <h2 class="products__title">Products</h2>
       <p class="products__subtitle">
-        Нақты Kaspi.kz тауарларына ұқсас демо-каталог. Сілтемелерді өзіңнің
-        шынайы өнімдеріңнің URL-мен ауыстыр.
+        Категориядағы тауарлар тізімі. Ұнаған өнімдерді лайктап, қажет
+        болмаса өшіре аласыз.
       </p>
     </div>
   </header>
 
-  <div class="products__grid" *ngIf="products.length; else noProducts">
-    <app-product-card
-      *ngFor="let product of products"
-      [product]="product"
-    ></app-product-card>
-  </div>
-
-  <ng-template #noProducts>
-    <p class="products__empty">Өнімдер табылған жоқ.</p>
-  </ng-template>
+  @if (visibleProducts.length) {
+    <div class="products__grid">
+      @for (product of visibleProducts; track product.id) {
+        <app-product-item
+          [product]="product"
+          (delete)="handleDelete($event)"
+        ></app-product-item>
+      }
+    </div>
+  } @else {
+    <p class="products__empty">Бұл категорияда өнімдер жоқ.</p>
+  }
 </section>
 
